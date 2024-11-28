@@ -1,10 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.http import JsonResponse 
+from django.views.decorators.http import require_http_methods 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from .models import Post, Comment
 from .forms import CommentForm
-
 
 
 # Blog home page view
@@ -43,6 +42,9 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 # Voting functionalities for posts and comments
+
+
+@require_http_methods(["POST"])
 @login_required
 def upvote_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -54,6 +56,7 @@ def upvote_post(request, post_id):
         post.upvotes.add(request.user)
     return JsonResponse({'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
 
+@require_http_methods(["POST"])
 @login_required
 def downvote_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -65,6 +68,7 @@ def downvote_post(request, post_id):
         post.downvotes.add(request.user)
     return JsonResponse({'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
 
+@require_http_methods(["POST"])
 @login_required
 def upvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
@@ -76,6 +80,7 @@ def upvote_comment(request, comment_id):
         comment.upvotes.add(request.user)
     return JsonResponse({'upvotes': comment.upvotes.count(), 'downvotes': comment.downvotes.count()})
 
+@require_http_methods(["POST"])
 @login_required
 def downvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)

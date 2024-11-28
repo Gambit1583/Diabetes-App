@@ -27,3 +27,11 @@ discussing experiences related to diabetes.
 
 - Python 3.6+ 
 - Django
+
+
+## Bugs, debugging and fixes or action
+
+- Attribute error indicating Comment model does not have a title
+  when trying to access Comments in admin panel.
+    - There is a __str__ method trying to reference a title fixed by updating
+      statement in Comments model.
