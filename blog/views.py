@@ -5,9 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from .forms import CommentForm
 
-# Home view
-def home(request):
-    return render(request, 'home.html')
+
 
 # Blog home page view
 def home_page(request):
@@ -50,7 +48,10 @@ def upvote_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.user in post.downvotes.all():
         post.downvotes.remove(request.user)
-    post.upvotes.add(request.user)
+    if request.user in post.upvotes.all():
+        post.upvotes.remove(request.user)
+    else:
+        post.upvotes.add(request.user)
     return JsonResponse({'upvotes': post.upvotes_count(), 'downvotes': post.downvotes_count()})
 
 @login_required
@@ -58,7 +59,10 @@ def downvote_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.user in post.upvotes.all():
         post.upvotes.remove(request.user)
-    post.downvotes.add(request.user)
+    if request.user in post.downvotes.all():
+        post.downvotes.remove(request.user)
+    else:
+        post.downvotes.add(request.user)
     return JsonResponse({'upvotes': post.upvotes_count(), 'downvotes': post.downvotes_count()})
 
 @login_required
@@ -66,7 +70,10 @@ def upvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if request.user in comment.downvotes.all():
         comment.downvotes.remove(request.user)
-    comment.upvotes.add(request.user)
+    if request.user in comment.upvotes.all():
+        comment.upvotes.remove(request.user)
+    else:
+        comment.upvotes.add(request.user)
     return JsonResponse({'upvotes': comment.upvotes_count(), 'downvotes': comment.downvotes_count()})
 
 @login_required
@@ -74,5 +81,8 @@ def downvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if request.user in comment.upvotes.all():
         comment.upvotes.remove(request.user)
-    comment.downvotes.add(request.user)
+    if request.user in comment.downvotes.all():
+        comment.downvotes.remove(request.user)
+    else:
+        comment.downvotes.add(request.user)
     return JsonResponse({'upvotes': comment.upvotes_count(), 'downvotes': comment.downvotes_count()})
