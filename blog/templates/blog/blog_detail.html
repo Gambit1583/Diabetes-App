@@ -1,49 +1,71 @@
-{% extends "base.html" %} 
-{% load static %} 
-{% block content %} 
-<div class="container mt-4"> 
-    <div class="row justify-content-center"> 
-        <div class="col-md-10"> 
-            <div class="card mb-4"> 
-            <img class="card-img-top" src="{% if post.featured_image and post.featured_image.name %}{{ post.featured_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ post.title }}"> 
-            <div class="card-body"> 
-                <h1 class="card-title">{{ post.title }}</h1> 
-                <p class="text-muted">By {{ post.author }} | {{ post.created_on }}</p> 
-                <hr /> 
-                <p class="card-text">{{ post.content }}</p>
-                <div class="voting"> 
-                    <button class="upvote" data-post-id="{{ post.id }}"> 
-                        👍 <span id="upvotes-{{ post.id }}">{{ post.upvotes_count }}</span> 
-                    </button> <button class="downvote" data-post-id="{{ post.id }}"> 
-                        👎 <span id="downvotes-{{ post.id }}">{{ post.downvotes_count }}</span> 
-                    </button> 
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- Post Card -->
+            <div class="card mb-4">
+                <img class="card-img-top" src="{% if post.featured_image and post.featured_image.name %}{{ post.featured_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ post.title }}">
+                <div class="card-body">
+                    <h1 class="card-title">{{ post.title }}</h1>
+                    <p class="text-muted">By {{ post.author }} | {{ post.created_on }}</p>
+                    <hr />
+                    <p class="card-text">{{ post.content }}</p>
+                    
+                    <!-- Post Voting -->
+                    <div class="voting">
+                        <button class="upvote" data-post-id="{{ post.id }}">
+                            👍 <span id="upvotes-{{ post.id }}">{{ post.upvotes_count }}</span>
+                        </button>
+                        <button class="downvote" data-post-id="{{ post.id }}">
+                            👎 <span id="downvotes-{{ post.id }}">{{ post.downvotes_count }}</span>
+                        </button>
+                    </div>
+
+                    <!-- Edit/Delete for Post -->
+                    {% if user == post.author or user.is_staff %}
+                        <div class="mt-3">
+                            <a href="{% url 'edit_post' post.id %}" class="btn btn-warning btn-sm">Edit Post</a>
+                            <a href="{% url 'delete_post' post.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Post</a>
+                        </div>
+                    {% endif %}
                 </div>
-            </div> 
-            </div> 
-        </div> 
-    </div> 
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Adds Comments section to browser -->
-
+<!-- Comments Section -->
 <div class="container mt-4">
     <h3>Comments</h3>
+    
+    <!-- List Comments -->
     {% for comment in comments %}
-    <div class="comment">
-        <p>{{ comment.content }}</p>
-        <p class="text-muted">By {{ comment.author }} | {{ comment.created_on }}</p>
-    </div>
+        <div class="comment border-bottom pb-3 mb-3">
+            <p>{{ comment.content }}</p>
+            <p class="text-muted">By {{ comment.author }} | {{ comment.created_on }}</p>
+            
+            <!-- Edit/Delete for Comment -->
+            {% if user == comment.author or user.is_staff %}
+                <div class="mt-2">
+                    <a href="{% url 'edit_comment' comment.id %}" class="btn btn-warning btn-sm">Edit Comment</a>
+                    <a href="{% url 'delete_comment' comment.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Comment</a>
+                </div>
+            {% endif %}
+        </div>
     {% empty %}
-    <p>No comments yet. Be the first to comment!</p>
+        <p>No comments yet. Be the first to comment!</p>
     {% endfor %}
 
-    <h4>Add a comment</h4>
+    <!-- Add a Comment Form -->
+    <h4>Add a Comment</h4>
     <form method="post" action="{% url 'blog_detail' post.slug %}">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-
-
 {% endblock %}
+

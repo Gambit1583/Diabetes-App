@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Post Deleted</h4>
+    <p>The post you were looking for has been deleted.</p>
+    <hr>
+    <a href="{% url 'home_page' %}" class="btn btn-primary">Return to Homepage</a>
+</div>
+{% endblock %}

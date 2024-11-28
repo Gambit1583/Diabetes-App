@@ -13,7 +13,6 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 
     <!-- Bootstrap CSS -->
@@ -21,11 +20,8 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
     <link rel="manifest" href="/site.webmanifest">
 
     <!-- Custom CSS -->
@@ -36,7 +32,12 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home_page' %}">GlucoGroove</a>
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home_page' %}">
+                <img src="{% static 'images/GlucoGroove_logo.jpg' %}" alt="GlucoGroove Logo" class="logo me-2">
+  
+                <strong class="glucogroove">GlucoGroove</strong>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -65,6 +66,7 @@
             </div>
         </div>
     </nav>
+    
 
     <!-- Messages -->
     <div class="container mt-3">
@@ -76,7 +78,9 @@
         {% endfor %}
     </div>
 
-    <main class="flex-shrink-0 main-bg">
+    <!-- Main content -->
+
+    <main class="flex-grow-1 main-bg">
         <div class="container">
             {% if user.is_authenticated %}
             <p class="text-end m-3">You are logged in as {{ user }}</p>
@@ -88,28 +92,26 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 dark-bg">
-        <p class="m-0 text-center text-white">
-            {% block copyright %}Made by Gambit1583{% endblock copyright %}
-        </p>
-        <p class="m-0 text-center text-white">Follow us:
-            <a href="#" class="text-white"><i class="fab fa-facebook-square ms-3"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-twitter-square ms-3"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-instagram-square ms-3"></i></a>
-            <a href="#" class="text-white"><i class="fab fa-youtube-square ms-3"></i></a>
-        </p>
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="m-0">
+                {% block copyright %}Made by Gambit1583{% endblock copyright %}
+            </p>
+            <p class="m-0">
+                Follow us:
+                <a href="#" class="text-white"><i class="fab fa-facebook-square ms-3"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-twitter-square ms-3"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram-square ms-3"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-youtube-square ms-3"></i></a>
+            </p>
+        </div>
     </footer>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
         <script src="{% static 'js/voting.js' %}"></script>
-        <script src="{% static 'blog/js/voting.js' %}"></script>
-
-        
-
-    {% block extras %}
-    {% endblock extras %}
 </body>
 
 </html>
