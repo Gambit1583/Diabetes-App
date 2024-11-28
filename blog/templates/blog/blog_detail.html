@@ -10,10 +10,50 @@
                 <h1 class="card-title">{{ post.title }}</h1> 
                 <p class="text-muted">By {{ post.author }} | {{ post.created_on }}</p> 
                 <hr /> 
-                <p class="card-text">{{ post.content }}</p> 
+                <p class="card-text">{{ post.content }}</p>
+                <div class="voting"> 
+                    <!-- button for upvoting/downvoting posts -->
+                    <button class="upvote" data-post-id="{{ post.id }}"> 
+                        👍 <span id="upvotes-{{ post.id }}">{{ post.upvotes_count }}</span> 
+                    </button> <button class="downvote" data-post-id="{{ post.id }}"> 
+                        👎 <span id="downvotes-{{ post.id }}">{{ post.downvotes_count }}</span> 
+                    </button> 
+                </div>
+            </div> 
             </div> 
         </div> 
     </div> 
 </div> 
-</div> 
+
+<!-- update votes dynamically -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.queryselectorAll('.upvote').forEach(button => {
+        button.addEventListener('click', function() {
+            const postId = this.getAttribute('data-post-id');
+            fetch(`/post/${postId}/upvote/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById(`upvotes-${postId}`) .textContent = data.upvotes;
+                    document.getElementById(`downvotes-${postId}`) .textContent = data.downvotes;
+                })
+        
+        })
+    })
+
+    document.querySelectorAll('.downvote').forEach(button => { 
+        button.addEventListener('click', function() { 
+            const postId = this.getAttribute('data-post-id'); 
+            fetch(`/post/${postId}/downvote/`) 
+            .then(response => response.json()) 
+            .then(data => { 
+                document.getElementById(`upvotes-${postId}`).textContent = data.upvotes; 
+                document.getElementById(`downvotes-${postId}`).textContent = data.downvotes; 
+                }); 
+            }); 
+        }); 
+});
+</script>
+
 {% endblock %}
