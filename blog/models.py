@@ -12,7 +12,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
-    featured_image = models.ImageField(upload_to='images/', default='images/default.jpg.webp', null=True, blank=True)
+    featured_image = models.ImageField(upload_to='images/', default='images/default.jpg', null=True, blank=True)
     excerpt = models.TextField()
     content = models.TextField()
     upvotes = models.ManyToManyField(User, related_name='post_upvotes', blank=True) 

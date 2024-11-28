@@ -13,7 +13,7 @@
                                 {% if post.featured_image and post.featured_image.name %}
                                 <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                                 {% else %}
-                                <img class="card-img-top" src="{% static 'images/default.jpg.webp' %}" alt="default image">
+                                <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="default image">
                                 {% endif %}
                                 <div class="image-flash">
                                     <p class="author">Author: {{ post.author }}</p>
