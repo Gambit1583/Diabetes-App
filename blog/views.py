@@ -24,7 +24,7 @@ def blog_detail(request, slug):
             comment.post = post
             comment.author = request.user
             comment.save()
-            return redirect('post_detail', slug=post.slug)
+            return redirect('blog_detail', slug=post.slug)
     else:
         form = CommentForm()
 
@@ -52,7 +52,7 @@ def upvote_post(request, post_id):
         post.upvotes.remove(request.user)
     else:
         post.upvotes.add(request.user)
-    return JsonResponse({'upvotes': post.upvotes_count(), 'downvotes': post.downvotes_count()})
+    return JsonResponse({'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
 
 @login_required
 def downvote_post(request, post_id):
@@ -63,7 +63,7 @@ def downvote_post(request, post_id):
         post.downvotes.remove(request.user)
     else:
         post.downvotes.add(request.user)
-    return JsonResponse({'upvotes': post.upvotes_count(), 'downvotes': post.downvotes_count()})
+    return JsonResponse({'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
 
 @login_required
 def upvote_comment(request, comment_id):
@@ -74,7 +74,7 @@ def upvote_comment(request, comment_id):
         comment.upvotes.remove(request.user)
     else:
         comment.upvotes.add(request.user)
-    return JsonResponse({'upvotes': comment.upvotes_count(), 'downvotes': comment.downvotes_count()})
+    return JsonResponse({'upvotes': comment.upvotes.count(), 'downvotes': comment.downvotes.count()})
 
 @login_required
 def downvote_comment(request, comment_id):
@@ -85,4 +85,4 @@ def downvote_comment(request, comment_id):
         comment.downvotes.remove(request.user)
     else:
         comment.downvotes.add(request.user)
-    return JsonResponse({'upvotes': comment.upvotes_count(), 'downvotes': comment.downvotes_count()})
+    return JsonResponse({'upvotes': comment.upvotes.count(), 'downvotes': comment.downvotes.count()})

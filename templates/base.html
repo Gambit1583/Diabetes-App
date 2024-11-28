@@ -93,62 +93,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-    <!-- Dynamic Voting System -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Post upvote/downvote handlers
-            document.querySelectorAll('.upvote').forEach(button => {
-                button.addEventListener('click', function() {
-                    const postId = this.getAttribute('data-post-id');
-                    fetch(`/blog/post/${postId}/upvote/`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById(`upvotes-${postId}`).textContent = data.upvotes;
-                            document.getElementById(`downvotes-${postId}`).textContent = data.downvotes;
-                        });
-                });
-            });
+        <script src="{% static 'js/voting.js' %}"></script>
+        <script src="{% static 'blog/js/voting.js' %}"></script>
 
-            document.querySelectorAll('.downvote').forEach(button => {
-                button.addEventListener('click', function() {
-                    const postId = this.getAttribute('data-post-id');
-                    fetch(`/blog/post/${postId}/downvote/`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById(`upvotes-${postId}`).textContent = data.upvotes;
-                            document.getElementById(`downvotes-${postId}`).textContent = data.downvotes;
-                        });
-                });
-            });
+        
 
-            // Comment upvote/downvote handlers
-            document.querySelectorAll('.upvote-comment').forEach(button => {
-                button.addEventListener('click', function() {
-                    const commentId = this.getAttribute('data-comment-id');
-                    fetch(`/blog/comment/${commentId}/upvote/`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById(`upvotes-${commentId}`).textContent = data.upvotes;
-                            document.getElementById(`downvotes-${commentId}`).textContent = data.downvotes;
-                        });
-                });
-            });
-
-            document.querySelectorAll('.downvote-comment').forEach(button => {
-                button.addEventListener('click', function() {
-                    const commentId = this.getAttribute('data-comment-id');
-                    fetch(`/blog/comment/${commentId}/downvote/`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById(`upvotes-${commentId}`).textContent = data.upvotes;
-                            document.getElementById(`downvotes-${commentId}`).textContent = data.downvotes;
-                        });
-                });
-            });
-        });
-    </script>
-
-    {% block extras %}{% endblock extras %}
+    {% block extras %}
+    {% endblock extras %}
 </body>
 
 </html>
