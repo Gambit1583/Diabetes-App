@@ -23,37 +23,19 @@
             </div> 
         </div> 
     </div> 
-</div> 
+</div>
 
-<!-- update votes dynamically -->
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.queryselectorAll('.upvote').forEach(button => {
-        button.addEventListener('click', function() {
-            const postId = this.getAttribute('data-post-id');
-            fetch(`/post/${postId}/upvote/`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById(`upvotes-${postId}`) .textContent = data.upvotes;
-                    document.getElementById(`downvotes-${postId}`) .textContent = data.downvotes;
-                })
-        
-        })
-    })
-
-    document.querySelectorAll('.downvote').forEach(button => { 
-        button.addEventListener('click', function() { 
-            const postId = this.getAttribute('data-post-id'); 
-            fetch(`/post/${postId}/downvote/`) 
-            .then(response => response.json()) 
-            .then(data => { 
-                document.getElementById(`upvotes-${postId}`).textContent = data.upvotes; 
-                document.getElementById(`downvotes-${postId}`).textContent = data.downvotes; 
-                }); 
-            }); 
-        }); 
-});
-</script>
+<!-- Adds Comments section to browser -->
+<div class="container mt-4"> 
+    <h3>Comments</h3> 
+    {% for comment in comments %} 
+    <div class="comment"> 
+        <p>{{ comment.content }}</p> 
+        <p class="text-muted">By {{ comment.author }} | {{ comment.created_on }}</p> 
+    </div> 
+    {% empty %} 
+    <p>No comments yet. Be the first to comment!</p> 
+    {% endfor %} 
+</div>
 
 {% endblock %}
