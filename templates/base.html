@@ -60,6 +60,11 @@
                         <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a> 
                     </li>
                     {% endif %}
+                    {% if user.is_authenticated %} 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="{% url 'create_post' %}">Create Blog Post</a> 
+                    </li> 
+                    {% endif %}
                 </ul>
                 <span class="navbar-text text-muted">
                     Manage your diabetes with ease

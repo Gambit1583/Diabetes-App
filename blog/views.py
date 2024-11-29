@@ -3,7 +3,7 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required 
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import PostForm, CommentForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
@@ -158,3 +158,18 @@ def delete_comment(request, comment_id):
     comment.delete()
     return redirect('blog_detail', slug=post_slug)
 
+# Create Post
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES) # This handles uploads
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('home_page')
+
+    else:
+        form = PostForm()
+    return render(request, 'blog/create_post.html', {'form': form})

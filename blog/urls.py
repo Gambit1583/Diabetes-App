@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_page, blog_detail, register, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment
+from .views import create_post, home_page, blog_detail, register, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -19,6 +19,9 @@ urlpatterns = [
     path('post/<int:post_id>/downvote/', downvote_post, name='downvote_post'),
     path('comment/<int:comment_id>/upvote/', upvote_comment, name='upvote_comment'),
     path('comment/<int:comment_id>/downvote/', downvote_comment, name='downvote_comment'),
+
+    # Create Post
+    path('create/', create_post, name='create_post'),
 
     # Edit and delete post views
     path('post/<int:post_id>/edit/', edit_post, name='edit_post'),

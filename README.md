@@ -1,4 +1,4 @@
-![GlucoGroove logo](/workspace/Diabetes-App/staticfiles/images/default.jpg)
+![GlucoGroove logo](/workspace/Diabetes-App/static/images/GlucoGroove_logo.jpg)
 
 # Diabetes Blog Application 
 
