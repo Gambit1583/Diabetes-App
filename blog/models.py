@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Models
 
-# # Allows for author dropdown when creating/editing post in the admin panel.
+# Allows for author dropdown when creating/editing post in the admin panel.
 # class Author(models.Model):
 #     name = models.CharField(max_length=100)
 
@@ -44,8 +44,8 @@ class Comment(models.Model):
     def upvotes_count(self): 
         return self.upvotes.count() 
             
-        def downvotes_count(self): 
-            return self.downvotes.count()
+    def downvotes_count(self): 
+        return self.downvotes.count()
             
 # Orders posts from newest to oldest.
     class Meta:
