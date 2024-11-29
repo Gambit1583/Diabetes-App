@@ -1,0 +1,25 @@
+{
+    "name": "GlucoGroove",
+    "short_name": "GlucoGroove",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#005b96",
+    "icons": [
+        {
+            "src": "staticfiles/images/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "staticfiles/images/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "staticfiles/images/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}

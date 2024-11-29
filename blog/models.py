@@ -38,7 +38,8 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True) 
     upvotes = models.ManyToManyField(User, related_name='comment_upvotes', blank=True) 
-    downvotes = models.ManyToManyField(User, related_name='comment_downvotes', blank=True) 
+    downvotes = models.ManyToManyField(User, related_name='comment_downvotes', blank=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE) 
     
     def upvotes_count(self): 
         return self.upvotes.count() 

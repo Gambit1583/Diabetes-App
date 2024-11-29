@@ -16,7 +16,7 @@ def home_page(request):
 # Blog detail view with comment functionality
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    comments = post.comments.all()
+    comments = post.comments.filter(parent__isnull=True) # This will only get top-level functions
 
     if request.method == 'POST':
         form = CommentForm(request.POST)

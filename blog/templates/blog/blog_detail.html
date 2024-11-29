@@ -45,7 +45,8 @@
     {% for comment in comments %}
         <div class="comment border-bottom pb-3 mb-3">
             <p>{{ comment.content }}</p>
-            <p class="text-muted">By {{ comment.author }} | {{ comment.created_on }}</p>
+            <p class="text-muted">By {{ comment.author }} | {{ comment.created_at }}</p>
+            <p>Upvotes: {{ comment.upvotes_count }} | Downvotes: {{ comment.downvotes_count }}</p>
             
             <!-- Edit/Delete for Comment -->
             {% if user == comment.author or user.is_staff %}
@@ -54,6 +55,27 @@
                     <a href="{% url 'delete_comment' comment.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Comment</a>
                 </div>
             {% endif %}
+
+            <!-- Reply link -->
+            <a href="#" class="reply-link" data-comment-id="{{ comment.id }}">Reply</a>
+            
+            <!-- Replies -->
+            {% for reply in comment.replies.all %}
+                <div class="reply ml-4 border-left pl-3 mt-2">
+                    <p>{{ reply.content }}</p>
+                    <p class="text-muted">By {{ reply.author }} | {{ reply.created_at }}</p>
+                    <p>Upvotes: {{ reply.upvotes_count }} | DOwnvotes: {{ reply.downvotes_count }}</p>
+
+                    <!-- Edit/Delete for replies -->
+                    {% if user == reply.author or user.is_staff %}
+                        <div class="mt-2">
+                            <a href="{% url 'edit_comment' reply.id %}" class="btn btn-warning btn-sm">Edit Reply</a>
+                            <a href="{% url 'delete_comment' reply.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Reply</a>
+                        </div>
+                    {% endif %}    
+                </div>
+            {% endfor %}
+
         </div>
     {% empty %}
         <p>No comments yet. Be the first to comment!</p>
@@ -64,8 +86,21 @@
     <form method="post" action="{% url 'blog_detail' post.slug %}">
         {% csrf_token %}
         {{ form.as_p }}
+        <input type="hidden" name="parent" id="id_parent">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() { 
+    document.querySelectorAll('.reply-link').forEach(link => { 
+        link.addEventListener('click', function(event) { 
+            event.preventDefault(); 
+            const commentId = this.getAttribute('data-comment-id'); 
+            document.querySelector('#id_parent').value = commentId; // Set parent ID in the form 
+        }); 
+    }); 
+});
+</script>
 {% endblock %}
 

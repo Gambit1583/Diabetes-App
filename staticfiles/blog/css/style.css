@@ -1,0 +1,16 @@
+/* custom_admin.css */ 
+body { 
+    background-color: sandybrown; /* Sand yellow */ 
+} 
+
+.module { 
+    background-color: lightgrey; /* Light grey for module background */ 
+} 
+
+.module .result-list, .module caption, .grp-table { 
+    background-color: lightblue; /* Light blue for result list and table */ 
+} .addlink, .deletelink, .changelink { color: red; /* Red for action links */ } 
+
+.breadcrumbs a { 
+    color: blue; /* Blue for breadcrumb links */ 
+}
