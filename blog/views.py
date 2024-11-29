@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required 
 from .models import Post, Comment
 from .forms import CommentForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 
 # Blog home page view
@@ -30,15 +32,16 @@ def blog_detail(request, slug):
     return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form': form})
 
 # User registration view
+# Register View
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save()
+            login(request, user)  # Automatically log the user in after registration
+            return redirect('home_page')  # Redirect to home or another page after successful registration
     else:
         form = UserCreationForm()
-
     return render(request, 'registration/register.html', {'form': form})
 
 # Voting functionalities for posts and comments

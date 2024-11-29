@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+
     // Post upvote/downvote handlers
     document.querySelectorAll('.upvote').forEach(button => {
         button.addEventListener('click', function() {
@@ -6,9 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/blog/post/${postId}/upvote/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken  // Adding CSRF token for security
                 },
-                body: JSON.stringify({}) // Optional: Include any necessary data here
+                body: JSON.stringify({})
             })
             .then(response => {
                 if (!response.ok) {
@@ -33,7 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/blog/post/${postId}/downvote/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken  // Adding CSRF token for security
                 },
                 body: JSON.stringify({})
             })
@@ -61,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/blog/comment/${commentId}/upvote/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken  // Adding CSRF token for security
                 },
                 body: JSON.stringify({})
             })
@@ -88,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/blog/comment/${commentId}/downvote/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken  // Adding CSRF token for security
                 },
                 body: JSON.stringify({})
             })

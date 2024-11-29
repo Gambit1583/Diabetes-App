@@ -1,4 +1,4 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+![GlucoGroove logo](/workspace/Diabetes-App/staticfiles/images/default.jpg)
 
 # Diabetes Blog Application 
 
@@ -35,3 +35,4 @@ discussing experiences related to diabetes.
   when trying to access Comments in admin panel.
     - There is a __str__ method trying to reference a title fixed by updating
       statement in Comments model.
+

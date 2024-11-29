@@ -37,7 +37,11 @@ ALLOWED_HOSTS = ['8000-gambit1583-diabetesapp-t389nuuxhb4.ws.codeinstitute-ide.n
 
 CSRF_TRUSTED_ORIGINS = ['https://*.codeinstitute-ide.net', 'https://*.herokuapp.com']
 
+# Authentication 
 
+LOGIN_URL = 'login'  # URL to redirect to when the user is not authenticated
+LOGIN_REDIRECT_URL = '/'  # redirect after successful login to home page
+LOGOUT_REDIRECT_URL = '/' # redirect after successful login to home page
 
 # Application definition
 
