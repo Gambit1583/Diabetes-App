@@ -127,4 +127,3 @@ document.querySelectorAll('.downvote-comment').forEach(button => {
         });
     });
 });
-
