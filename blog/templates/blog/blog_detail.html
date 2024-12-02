@@ -92,7 +92,7 @@
 </div>
 
 <!-- JavaScript for Voting and Reply Handling -->
-<script src="{% static 'blog/js/voting.js' %}"></script>
+<!-- <script src="{% static 'blog/js/voting.js' %}"></script> -->
 <script>
 document.addEventListener('DOMContentLoaded', function() { 
     document.querySelectorAll('.reply-link').forEach(link => { 
@@ -104,4 +104,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }); 
 });
 </script>
+<script src="{% static 'blog/js/voting.js' %}"></script>
 {% endblock %}
