@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import create_post, home_page, blog_detail, register, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment
 from django.contrib.auth import views as auth_views
+from . import views
 
 urlpatterns = [
     # Home page view
@@ -12,7 +13,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     # Blog post detail view
-    path('post/<slug:slug>/', blog_detail, name='blog_detail'),
+    path('post/<slug:slug>/', views.blog_detail, name='blog_detail'),
 
     # Voting functionalities for posts and comments
     path('blog/post/<int:post_id>/upvote/', upvote_post, name='upvote_post'),

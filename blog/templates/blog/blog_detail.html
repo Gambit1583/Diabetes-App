@@ -42,43 +42,46 @@
     <h3>Comments</h3>
     
     <!-- List Comments -->
-    {% for comment in comments %}
-        <div class="comment border-bottom pb-3 mb-3">
-            <p>{{ comment.content }}</p>
-            <p class="text-muted">By {{ comment.author }} | {{ comment.created_at }}</p>
-            <p>Upvotes: {{ comment.upvotes_count }} | Downvotes: {{ comment.downvotes_count }}</p>
+    {% for comment in comments %} 
+    <div class="comment border-bottom pb-3 mb-3"> 
+        <p>{{ comment.content }}</p> 
+        <p class="text-muted">By {{ comment.author }} | {{ comment.created_at }}</p> 
+        <p>Upvotes: <span id="upvotes-{{ comment.id }}">{{ comment.upvotes.count }}</span> | Downvotes: <span id="downvotes-{{ comment.id }}">{{ comment.downvotes.count }}</span></p> 
+        <button class="upvote-comment" data-comment-id="{{ comment.id }}">Upvote</button> 
+        <button class="downvote-comment" data-comment-id="{{ comment.id }}">Downvote</button>
             
-            <!-- Edit/Delete for Comment -->
+        <!-- Edit/Delete for Comment -->
             {% if user == comment.author or user.is_staff %}
-                <div class="mt-2">
-                    <a href="{% url 'edit_comment' comment.id %}" class="btn btn-warning btn-sm">Edit Comment</a>
-                    <a href="{% url 'delete_comment' comment.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Comment</a>
-                </div>
-            {% endif %}
+            <div class="mt-2">
+                <a href="{% url 'edit_comment' comment.id %}" class="btn btn-warning btn-sm">Edit Comment</a>
+                <a href="{% url 'delete_comment' comment.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Comment</a>
+            </div>
+        {% endif %}
 
-            <!-- Reply link -->
-            <a href="#" class="reply-link" data-comment-id="{{ comment.id }}">Reply</a>
-            
-            <!-- Replies -->
-            {% for reply in comment.replies.all %}
-                <div class="reply ml-4 border-left pl-3 mt-2">
-                    <p>{{ reply.content }}</p>
-                    <p class="text-muted">By {{ reply.author }} | {{ reply.created_at }}</p>
-                    <p>Upvotes: {{ reply.upvotes_count }} | Downvotes: {{ reply.downvotes_count }}</p>
+        <!-- Reply link -->
+        <a href="#" class="reply-link" data-comment-id="{{ comment.id }}">Reply</a>
+        
+        <!-- Replies -->
+        {% for reply in comment.replies.all %} 
+        <div class="reply ml-4 border-left pl-3 mt-2"> 
+            <p>{{ reply.content }}</p> 
+            <p class="text-muted">By {{ reply.author }} | {{ reply.created_at }}</p> 
+            <p>Upvotes: <span id="upvotes-{{ reply.id }}">{{ reply.upvotes.count }}</span> | Downvotes: <span id="downvotes-{{ reply.id }}">{{ reply.downvotes.count }}</span></p> 
+            <button class="upvote-comment" data-comment-id="{{ reply.id }}">Upvote</button> 
+            <button class="downvote-comment" data-comment-id="{{ reply.id }}">Downvote</button>
 
-                    <!-- Edit/Delete for replies -->
+            <!-- Edit/Delete for replies -->
                     {% if user == reply.author or user.is_staff %}
-                        <div class="mt-2">
-                            <a href="{% url 'edit_comment' reply.id %}" class="btn btn-warning btn-sm">Edit Reply</a>
-                            <a href="{% url 'delete_comment' reply.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Reply</a>
-                        </div>
-                    {% endif %}    
+                <div class="mt-2">
+                    <a href="{% url 'edit_comment' reply.id %}" class="btn btn-warning btn-sm">Edit Reply</a>
+                    <a href="{% url 'delete_comment' reply.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete Reply</a>
                 </div>
-            {% endfor %}
-
+            {% endif %}    
         </div>
-    {% empty %}
-        <p>No comments yet. Be the first to comment!</p>
+        {% endfor %}
+    </div> 
+    {% empty %} 
+        <p>No comments yet. Be the first to comment!</p> 
     {% endfor %}
 
     <!-- Add a Comment Form -->
@@ -91,15 +94,28 @@
     </form>
 </div>
 
+<!-- Reply Form (hidden initially) --> 
+<div id="reply-form-container" style="display: none;"> 
+    <h4>Reply to Comment</h4> 
+    <form method="post" action="{% url 'blog_detail' post.slug %}"> 
+        {% csrf_token %} 
+        {{ form|crispy }} 
+        <input type="hidden" name="parent" id="reply_parent_id"> 
+        <button type="submit" class="btn btn-primary">Submit Reply</button> 
+    </form> 
+</div>
+
 <!-- JavaScript for Voting and Reply Handling -->
-<!-- <script src="{% static 'blog/js/voting.js' %}"></script> -->
 <script>
 document.addEventListener('DOMContentLoaded', function() { 
     document.querySelectorAll('.reply-link').forEach(link => { 
         link.addEventListener('click', function(event) { 
             event.preventDefault(); 
             const commentId = this.getAttribute('data-comment-id'); 
-            document.querySelector('#id_parent').value = commentId; // Set parent ID in the form 
+            document.querySelector('#reply_parent_id').value = commentId; 
+            const replyForm = document.querySelector('#reply-form-container'); 
+            replyForm.style.display = 'block'; 
+            this.parentNode.appendChild(replyForm); 
         }); 
     }); 
 });
