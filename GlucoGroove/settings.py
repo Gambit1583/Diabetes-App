@@ -142,12 +142,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+import os
 
-MEDIA_URL = '/media/' 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+# Static files (CSS, JavaScript, images)
+STATIC_URL = '/static/'
+
+# For development, you can add directories where static files are stored
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Directory for additional static files (for dev only)
+
+# This is where collected static files are placed when you run `collectstatic`
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for static files after running collectstatic
+
+# Media files (user-uploaded content)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Add these for WhiteNoise 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
