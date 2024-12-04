@@ -13,8 +13,13 @@ discussing experiences related to diabetes.
 
 - User registration and authentication 
 - Create, edit, and delete blog posts 
-- Leave comments on blog posts 
-- Upvote and downvote comments 
+- Leave comments on blog posts
+- Reply to comments and reply to replies
+- Upvote and downvote comments
+- Track blood sugars
+- View a graph illustrating blood sugar level input by user
+- Keep a food diary
+- Keep a daily diary 
 - Responsive design for mobile and desktop 
 
 ## Technologies Used 
@@ -46,7 +51,7 @@ discussing experiences related to diabetes.
     Identified that a management command was over-writing the featured_image field.
     Commented out management command and STATICFILES_STORAGE which has fixed the error.
 
-## Creits
+## Credits
 
 - John Rearden for his fantastic support as a coding coach.
 - Stack Overflow
