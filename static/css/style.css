@@ -54,17 +54,16 @@ main {
     font-family: 'Lato', sans-serif;
     font-weight: bold;
     background: linear-gradient(to right, #004aad, #d63333, #909090, #e4c580);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #000; /* Fallback color for unsupported browsers */
     font-size: 2rem;
 }
 
 .glucogroove:hover {
     background: linear-gradient(to left, #e4c580, #909090, #d63333, #004aad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff; /* Fallback color for hover state */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Dropdown Menu */
 .dropdown-menu {
