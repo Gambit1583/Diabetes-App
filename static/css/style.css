@@ -66,8 +66,21 @@ main {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Cards */
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: var(--primary-blue) !important;
+}
 
+.dropdown-item {
+    color: var(--text-light) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--secondary-red) !important;
+    color: var(--text-light) !important;
+}
+
+/* Cards */
 .card {
     margin-bottom: 1.5rem;
 }
@@ -103,7 +116,29 @@ main {
     box-sizing: border-box;
 }
 
+/* Form Fields Styling */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
+form div {
+    flex: 1 1 48%;
+    margin-bottom: 15px !important;
+}
+
+form label {
+    display: block !important;
+    margin-bottom: 5px !important;
+}
+
+form input, form select {
+    width: 100% !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+    margin-bottom: 10px !important;
+}
 
 /* Buttons */
 .btn-primary {
@@ -114,6 +149,7 @@ main {
     font-size: 16px;
     cursor: pointer;
     border: 4px;
+    margin-top: 10px !important; /* Adding some margin to space out the button */
 }
 
 .btn-primary:hover {
@@ -156,7 +192,7 @@ footer p {
 }
 
 .footer a {
-    color: var(--accent-gold);
+    color: var (--accent-gold);
     text-decoration: none;
 }
 
@@ -196,9 +232,18 @@ a:focus {
     }
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .card {
         flex: 1 1 calc(50% - 1rem);
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    form div {
+        width: 100% !important;
     }
 }
 
@@ -206,5 +251,12 @@ a:focus {
     .card {
         flex: 1 1 calc(100% - 1rem);
     }
-}
 
+    form {
+        flex-direction: column;
+    }
+
+    form div {
+        width: 100% !important;
+    }
+}

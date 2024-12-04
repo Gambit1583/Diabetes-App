@@ -49,18 +49,23 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{% url 'home_page' %}">Home</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blood_sugar_tracker' %}">Blood Sugar Tracker</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trackers
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'blood_sugars:blood_sugar_tracker' %}">Blood Sugar Tracker</a></li>
+                            <li><a class="dropdown-item" href="{% url 'blood_sugars:food_diary' %}">Food Diary</a></li>
+                            <li><a class="dropdown-item" href="{% url 'blood_sugars:daily_diary' %}">Daily Diary</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'food_diary' %}">Food Diary</a>
+                        <a class="nav-link" href="{% url 'create_post' %}">Create Blog Post</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'daily_diary' %}">Daily Diary</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="{% url 'fetch_glucose_data' %}">Fetch Glucose Data</a>
-                    </li> -->
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
@@ -68,14 +73,9 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/register/' %}active{% endif %}" href="{% url 'register' %}">Register</a>
                     </li>
-                    <li class="nav-item"> 
-                        <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a> 
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
                     </li>
-                    {% endif %}
-                    {% if user.is_authenticated %} 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="{% url 'create_post' %}">Create Blog Post</a> 
-                    </li> 
                     {% endif %}
                 </ul>
                 <span class="navbar-text text-muted">

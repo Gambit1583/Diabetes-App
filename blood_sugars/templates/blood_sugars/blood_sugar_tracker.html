@@ -2,38 +2,57 @@
 
 {% block content %}
 <h2>Blood Sugar Tracker</h2>
-<form method="post" action="{% url 'blood_sugar_tracker' %}">
+<form method="post" action="{% url 'blood_sugars:blood_sugar_tracker' %}">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div>
+        <label for="blood_sugar">Blood Sugar:</label>
+        <input type="number" id="blood_sugar" name="blood_sugar_level" min="0" step="0.1" required>
+    </div>
+    <div>
+        <label for="carbohydrates">Carbohydrates:</label>
+        <input type="number" id="carbohydrates" name="carbohydrates_eaten" min="0" step="0.1" required>
+    </div>
+    <div>
+        <label for="bolus_insulin">Bolus Insulin (optional):</label>
+        <input type="number" id="bolus_insulin" name="bolus_insulin" min="0" step="0.1">
+    </div>
+    <div>
+        <label for="basal_insulin">Basal Insulin (optional):</label>
+        <input type="number" id="basal_insulin" name="basal_insulin" min="0" step="0.1">
+    </div>
     <button type="submit" class="btn btn-primary">Add Record</button>
 </form>
 
 <h3>Time Range</h3>
 <select id="timeRange" class="form-control">
-    <option value="24h">24 Hours</option>
-    <option value="48h">48 Hours</option>
-    <option value="weekly">Weekly</option>
-    <option value="monthly">Monthly</option>
-    <option value="quarterly">Quarterly</option>
-    <option value="six_monthly">Six Monthly</option>
-    <option value="yearly">Yearly</option>
+    <option value="24h" {% if time_range == "24h" %}selected{% endif %}>24 Hours</option>
+    <option value="48h" {% if time_range == "48h" %}selected{% endif %}>48 Hours</option>
+    <option value="weekly" {% if time_range == "weekly" %}selected{% endif %}>Weekly</option>
+    <option value="monthly" {% if time_range == "monthly" %}selected{% endif %}>Monthly</option>
+    <option value="quarterly" {% if time_range == "quarterly" %}selected{% endif %}>Quarterly</option>
+    <option value="six_monthly" {% if time_range == "six_monthly" %}selected{% endif %}>Six Monthly</option>
+    <option value="yearly" {% if time_range == "yearly" %}selected{% endif %}>Yearly</option>
 </select>
 
 <h3>Previous Records</h3>
 <canvas id="bloodSugarChart" width="400" height="200"></canvas>
 <div class="legend">
+    <span style="background-color: rgba(255, 0, 0, 0.3);">Low</span>
     <span style="background-color: rgba(75, 192, 192, 0.3);">Normal</span>
     <span style="background-color: rgba(255, 165, 0, 0.3);">High</span>
-    <span style="background-color: rgba(255, 0, 0, 0.3);">Very High/Low</span>
+    <span style="background-color: rgba(255, 0, 0, 0.3);">Very High</span>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('bloodSugarChart').getContext('2d');
-    const labels = JSON.parse('{{ labels|escapejs }}');
+    const labels = JSON.parse('{{ labels|escapejs }}').map(date => new Date(date));
     const data = JSON.parse('{{ data|escapejs }}');
-    
+
     let bloodSugarChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -55,25 +74,19 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 x: {
                     type: 'time',
-                    title: {
-                        display: true,
-                        text: 'Date'
-                    }
+                    time: { unit: 'day', displayFormats: { day: 'MMM D, HH:mm' }, tooltipFormat: 'll HH:mm' },
+                    title: { display: true, text: 'Date/Time' }
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Blood Sugar Level (mg/dL)'
-                    }
-                }
+                y: { title: { display: true, text: 'Blood Sugar Level (mg/dL)' } }
             }
         }
     });
 
     document.getElementById('timeRange').addEventListener('change', function() {
         const selectedRange = this.value;
-        window.location.href = `{% url 'blood_sugar_tracker' %}?time_range=${selectedRange}`;
+        window.location.href = `{% url 'blood_sugars:blood_sugar_tracker' %}?time_range=${selectedRange}`;
     });
 });
 </script>
 {% endblock %}
+

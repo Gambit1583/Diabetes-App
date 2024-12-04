@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chart.js": "^4.4.7",
+    "chartjs-adapter-moment": "^1.0.1"
+  }
+}
