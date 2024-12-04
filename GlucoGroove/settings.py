@@ -144,21 +144,16 @@ USE_TZ = True
 
 import os
 
-# Static files (CSS, JavaScript, images)
-STATIC_URL = '/static/'
-
-# For development, you can add directories where static files are stored
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Directory for additional static files (for dev only)
-
-# This is where collected static files are placed when you run `collectstatic`
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for static files after running collectstatic
-
+STATIC_URL = '/static/'  # The URL to serve static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Where your static files are during development
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Where static files will be stored after collectstatic
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Add these for WhiteNoise 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # STORAGES = {
 #     "staticfiles": {
