@@ -6,7 +6,7 @@ class BloodSugarForm(forms.ModelForm):
         model = BloodSugarRecord
         fields = ['blood_sugar_level', 'carbohydrates_eaten']
 
-class FoodDiaryForm(form.ModelForm):
+class FoodDiaryForm(forms.ModelForm):
     class Meta:
         model = FoodDiaryEntry
         fields = ['meal_time', 'food_item', 'calories']

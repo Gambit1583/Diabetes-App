@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Daily Diary</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Entry</button>
+</form>
+
+<h3>Previous Entries</h3>
+<ul>
+    {% for entry in entries %}
+        <li>{{ entry.entry_time }}: {{ entry.content }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

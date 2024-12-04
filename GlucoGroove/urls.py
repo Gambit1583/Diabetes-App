@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    
+    path('blood_sugars/', include('blood_sugars.urls')),
 ]
 
 # if settings.DEBUG: 

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Blood Sugar Tracker</h2>
+<form method="post" action="{% url 'blood_sugar_tracker' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Record</button>
+</form>
+
+<h3>Time Range</h3>
+<select id="timeRange" class="form-control">
+    <option value="24h">24 Hours</option>
+    <option value="48h">48 Hours</option>
+    <option value="weekly">Weekly</option>
+    <option value="monthly">Monthly</option>
+    <option value="quarterly">Quarterly</option>
+    <option value="six_monthly">Six Monthly</option>
+    <option value="yearly">Yearly</option>
+</select>
+
+<h3>Previous Records</h3>
+<canvas id="bloodSugarChart" width="400" height="200"></canvas>
+<div class="legend">
+    <span style="background-color: rgba(75, 192, 192, 0.3);">Normal</span>
+    <span style="background-color: rgba(255, 165, 0, 0.3);">High</span>
+    <span style="background-color: rgba(255, 0, 0, 0.3);">Very High/Low</span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('bloodSugarChart').getContext('2d');
+    const labels = JSON.parse('{{ labels|escapejs }}');
+    const data = JSON.parse('{{ data|escapejs }}');
+    
+    let bloodSugarChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Blood Sugar Levels',
+                data: data,
+                borderColor: 'rgb(255, 99, 132)',
+                fill: false,
+                backgroundColor: function(context) {
+                    const value = context.dataset.data[context.dataIndex];
+                    return value <= 3.9 ? 'rgba(255, 0, 0, 0.3)' :
+                           (value >= 8 && value <= 12 ? 'rgba(255, 165, 0, 0.3)' :
+                           (value >= 12.1 ? 'rgba(255, 0, 0, 0.3)' : 'rgba(75, 192, 192, 0.3)'));
+                }
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Blood Sugar Level (mg/dL)'
+                    }
+                }
+            }
+        }
+    });
+
+    document.getElementById('timeRange').addEventListener('change', function() {
+        const selectedRange = this.value;
+        window.location.href = `{% url 'blood_sugar_tracker' %}?time_range=${selectedRange}`;
+    });
+});
+</script>
+{% endblock %}
