@@ -24,14 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-gambit1583-diabetesapp-t389nuuxhb4.ws.codeinstitute-ide.net', '.herokuapp.com']
 
@@ -51,25 +50,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
     'cloudinary',
-    'django_cloudistatic',
+    'cloudinary_storage',
+    'whitenoise.runserver_nostatic',
     'blog',
     'blood_sugars',
     'crispy_forms',
     'crispy_bootstrap4',
 ]
 
-CLOUDINARY_STORAGE = True 
-CLOUDINARY_STORAGE_BASE_URL = 'https://res.cloudinary.com/your-cloud-name/' 
-CLOUDINARY_STORAGE_PUBLIC_OPTIONS = { 
-    'resource_type': 'image', 
-    'effect': 'sepia', 
-    'quality': 'auto',
-}
+CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
+
+if CLOUDINARY_URL: 
+    url_parts = CLOUDINARY_URL.split('@')[0].split(':') 
+    os.environ['CLOUDINARY_CLOUD_NAME'] = CLOUDINARY_URL.split('@')[1] 
+    os.environ['CLOUDINARY_API_KEY'] = url_parts[1].split('//')[1] 
+    os.environ['CLOUDINARY_API_SECRET'] = url_parts[2]
 
 MIDDLEWARE = [
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,18 +104,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
-
-
 
 CSRF_TRUSTED_ORIGINS = ['https://*.codeinstitute-ide.net', 'https://*.herokuapp.com']
 
@@ -155,27 +145,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage' 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
-
 STATICFILES_DIRS = [
     os.getenv('STATICFILES_DIRS', os.path.join(BASE_DIR, 'static'))
 ]
-
 STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Add these for WhiteNoise 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'django_cloudistatic.storage.CloudinaryStaticFilesStorage'
 
-# STORAGES = {
-#     "staticfiles": {
-#     "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#  },
-# }
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
