@@ -7,22 +7,26 @@ from django.contrib.auth.models import User
 # class Author(models.Model):
 #     name = models.CharField(max_length=100)
 
+from django.db import models
+from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
+
 class Post(models.Model):
     title = models.CharField(max_length=260)
     slug = models.SlugField(unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    featured_image = models.ImageField(upload_to='images/', default='images/default.jpg', null=True, blank=True)
+    featured_image = CloudinaryField('image', default='images/default.jpg', null=True, blank=True)
     excerpt = models.TextField()
     content = models.TextField()
-    upvotes = models.ManyToManyField(User, related_name='post_upvotes', blank=True) 
-    downvotes = models.ManyToManyField(User, related_name='post_downvotes', blank=True) 
+    upvotes = models.ManyToManyField(User, related_name='post_upvotes', blank=True)
+    downvotes = models.ManyToManyField(User, related_name='post_downvotes', blank=True)
     
-    def upvotes_count(self): 
-        return self.upvotes.count() 
+    def upvotes_count(self):
+        return self.upvotes.count()
         
-    def downvotes_count(self): 
+    def downvotes_count(self):
         return self.downvotes.count()
 
     class Meta:
@@ -30,6 +34,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model): 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments') 
