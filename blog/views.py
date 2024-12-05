@@ -1,12 +1,12 @@
-from django.http import JsonResponse # HttpResponseForbidden 
-from django.views.decorators.http import require_http_methods 
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-
+from django.http import HttpResponseForbidden
 
 # Blog home page view
 def home_page(request):
@@ -16,7 +16,7 @@ def home_page(request):
 # Blog detail view with comment functionality
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    comments = post.comments.filter(parent__isnull=True) # This will only get top-level functions
+    comments = post.comments.filter(parent__isnull=True) # This will only get top-level comments
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -32,7 +32,6 @@ def blog_detail(request, slug):
     return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form': form})
 
 # User registration view
-# Register View
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -45,8 +44,6 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 # Voting functionalities for posts and comments
-
-
 @require_http_methods(["POST"])
 @login_required
 def upvote_post(request, post_id):
@@ -70,8 +67,6 @@ def downvote_post(request, post_id):
     else:
         post.downvotes.add(request.user)
     return JsonResponse({'upvotes': post.upvotes.count(), 'downvotes': post.downvotes.count()})
-
-
 
 @require_http_methods(["POST"])
 @login_required
@@ -98,7 +93,6 @@ def downvote_comment(request, comment_id):
     return JsonResponse({'upvotes': comment.upvotes.count(), 'downvotes': comment.downvotes.count()})
 
 # Edit post
-
 @login_required
 def edit_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -116,7 +110,6 @@ def edit_post(request, post_id):
     return render(request, 'blog/edit_post.html', {'post': post})
 
 # Delete Post if user
-
 @login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -159,7 +152,6 @@ def delete_comment(request, comment_id):
     return redirect('blog_detail', slug=post_slug)
 
 # Create Post
-
 @login_required
 def create_post(request):
     if request.method == 'POST':

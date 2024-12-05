@@ -64,7 +64,6 @@ main {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-
 /* Dropdown Menu */
 .dropdown-menu {
     background-color: var(--primary-blue) !important;
@@ -81,17 +80,33 @@ main {
 
 /* Cards */
 .card {
+    height: auto;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1.5rem;
+    box-sizing: border-box;
 }
 
 .card-img-top {
     width: 100%;
     height: auto;
     object-fit: cover;
+    max-height: 250px; /* Ensure images fit within the card */
 }
 
 .card-body {
     text-align: center;
+    flex-grow: 1; /* Ensures the card body takes up remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Adjusts spacing within the card body */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+.card-title, .card-text { 
+    white-space: nowrap; /* Prevent text wrapping */ 
+    overflow: hidden; /* Hide overflow text */ 
+    text-overflow: ellipsis; /* Add ellipsis to overflowing text */
 }
 
 .card-title {
@@ -113,6 +128,15 @@ main {
 .card {
     flex: 1 1 calc(33.333% - 1rem);
     box-sizing: border-box;
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-primary {
+    margin-top: auto;
 }
 
 /* Form Fields Styling */
@@ -148,7 +172,7 @@ form input, form select {
     font-size: 16px;
     cursor: pointer;
     border: 4px;
-    margin-top: 10px !important; /* Adding some margin to space out the button */
+    margin-top: 10px !important;
 }
 
 .btn-primary:hover {
@@ -191,7 +215,7 @@ footer p {
 }
 
 .footer a {
-    color: var (--accent-gold);
+    color: var(--accent-gold);
     text-decoration: none;
 }
 
@@ -220,7 +244,7 @@ a:focus {
 }
 
 /* High-contrast Modes */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
     :root {
         --primary-blue: #003366;
         --secondary-red: #b22222;
@@ -231,31 +255,104 @@ a:focus {
     }
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+/* Responsive Adjustments for problematic range */
+@media (min-width: 371px) and (max-width: 767px) {
     .card {
         flex: 1 1 calc(50% - 1rem);
     }
-
-    form {
-        flex-direction: column;
+    .card-title {
+        font-size: 1.25rem;
     }
+    .card-text {
+        font-size: 0.9rem;
+    }
+    .post-link {
+        display: block;
+        text-align: center; /* Ensure link is centered */
+    }
+    .btn-primary {
+        display: block;
+        width: 100%;
+    }
+}
 
-    form div {
-        width: 100% !important;
+/* Responsive Adjustments */ 
+@media (max-width: 768px) { 
+    .card { 
+        flex: 1 1 calc(50% - 1rem); 
+    } 
+    form { 
+        flex-direction: column; 
+    } 
+    form div { 
+        width: 100% !important; 
+    } 
+}
+
+@media (max-width: 576px) { 
+    .card { 
+        flex: 1 1 calc(100% - 1rem); 
+    } 
+    form { 
+        flex-direction: column; 
+    } 
+    form div { 
+        width: 100% !important; 
+    } 
+}
+
+@media (min-width: 768px) { 
+    .card { 
+        height: 450px; /* Adjust height for larger screens */ 
+    } 
+    .card-img-top { 
+        height: 250px; /* Adjust image height for larger screens */ 
+    } 
+}
+
+/* Ensure the card elements are always visible and clickable */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-body {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.post-link {
+    text-decoration: none; /* Ensure the link is not hidden */
+    color: inherit;
+}
+
+.btn-primary {
+    margin-top: auto; /* Ensure the button stays at the bottom */
+}
+
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.25rem;
+    }
+    .card-text {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 576px) {
-    .card {
-        flex: 1 1 calc(100% - 1rem);
+    .card-title {
+        font-size: 1rem;
     }
-
-    form {
-        flex-direction: column;
-    }
-
-    form div {
-        width: 100% !important;
+    .card-text {
+        font-size: 0.85rem;
     }
 }
