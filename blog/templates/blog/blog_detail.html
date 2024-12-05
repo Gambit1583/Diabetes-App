@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+<script src="{% static 'blog/js/voting.js' %}"></script>
+<img class="card-img-top" src="{% if post.featured_image and post.featured_image.name %}{{ post.featured_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ post.title }}">
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-4">
@@ -12,7 +14,7 @@
                     <h1 class="card-title">{{ post.title }}</h1>
                     <p class="text-muted">By {{ post.author }} | {{ post.created_on }}</p>
                     <hr />
-                    <p class="card-text">{{ post.excerpt }}</p>
+                    <p class="card-text">{{ post.content }}</p>
                     
                     <!-- Post Voting -->
                     <div class="voting">
@@ -120,5 +122,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }); 
 });
 </script>
-<script src="{% static 'blog/js/voting.js' %}"></script>
+<!-- <script src="{% static 'blog/js/voting.js' %}"></script> -->
 {% endblock %}

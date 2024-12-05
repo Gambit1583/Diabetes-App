@@ -111,7 +111,7 @@ def edit_post(request, post_id):
         post.title = request.POST['title']
         post.content = request.POST['content']
         post.save()
-        return redirect('blod_detail', slug=post.slug)
+        return redirect('blog_detail', slug=post.slug)
 
     return render(request, 'blog/edit_post.html', {'post': post})
 

@@ -144,10 +144,14 @@ USE_TZ = True
 
 import os
 
-STATIC_URL = '/static/'  # The URL to serve static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Where your static files are during development
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Where static files will be stored after collectstatic
-# Media files (user-uploaded content)
+STATIC_URL = os.getenv('STATIC_URL', '/static/')
+
+STATICFILES_DIRS = [
+    os.getenv('STATICFILES_DIRS', os.path.join(BASE_DIR, 'static'))
+]
+
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
