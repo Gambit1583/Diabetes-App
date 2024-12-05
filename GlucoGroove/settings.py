@@ -169,7 +169,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Add these for WhiteNoise 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-  STATICFILES_STORAGE = 'django_cloudistatic.storage.CloudinaryStaticFilesStorage'
+STATICFILES_STORAGE = 'django_cloudistatic.storage.CloudinaryStaticFilesStorage'
 
 # STORAGES = {
 #     "staticfiles": {
