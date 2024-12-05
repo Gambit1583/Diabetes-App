@@ -9,7 +9,7 @@
             <!-- Post Card -->
             <div class="card mb-4">
                 <img class="card-img-top" 
-                     src="{% if post.featured_image and post.featured_image.name %}{{ post.featured_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" 
+                     src="{% if not 'default' in post.featured_image.url %}{{ post.featured_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" 
                      alt="{{ post.title }}">
 
                 <div class="card-body">

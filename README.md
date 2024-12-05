@@ -1,13 +1,15 @@
-![GlucoGroove logo](/workspace/Diabetes-App/static/images/GlucoGroove_logo.jpg)
+![GlucoGroove logo](static/images/GlucoGroove_logo.jpg)
 
-# Diabetes Blog Application 
+# **GlucoGroove**
 
 ## Overview 
 
-This project is a Django-based blog application that allows users to register, log in, 
+**GlucoGroove** is a Django-based online blog application that allows users to register, log in, 
 create new blog posts, leave comments, upvote or downvote comments, and interact with 
 other users' posts. The application is designed to provide a platform for sharing and 
-discussing experiences related to diabetes. 
+discussing experiences related to diabetes. The hope is to create an online community for those with diabetes
+while giving the user a private space to record and track their blood sugars, food intake and 
+general record their daily lives in a safe space.
 
 ## Features 
 
@@ -51,9 +53,18 @@ discussing experiences related to diabetes.
     Identified that a management command was over-writing the featured_image field.
     Commented out management command and STATICFILES_STORAGE which has fixed the error.
 
+  - Further issues in relation to static file storage were causing lack of responsiveness in heroku
+    after starting a second application in my project. After running similar fixes to the previous ones 
+    the issue was not resolved.
+    This was eventually fixed by rewriting my entire settings.py and including the installation of
+    Cloudinary within my project.
+
 ## Credits
 
 - John Rearden for his fantastic support as a coding coach.
+- Kevin Loughrey for his 1-1 support
 - Stack Overflow
 - WECA cohort for help and advice at a time where we all had 
   the pressure of our capstone project.
+- Chat gpt for debugging snippets and recoomendations on structure/formatting 
+

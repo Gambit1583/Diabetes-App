@@ -12,7 +12,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
-                                {% if post.featured_image and post.featured_image.name %}
+                                {% if not "default" in post.featured_image.url %}
                                 <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                                 {% else %}
                                 <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="default image">
