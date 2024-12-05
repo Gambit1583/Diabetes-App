@@ -51,14 +51,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
+    'django_cloudistatic',
     'blog',
     'blood_sugars',
     'crispy_forms',
     'crispy_bootstrap4',
 ]
 
+CLOUDINARY_STORAGE = True 
+CLOUDINARY_STORAGE_BASE_URL = 'https://res.cloudinary.com/your-cloud-name/' 
+CLOUDINARY_STORAGE_PUBLIC_OPTIONS = { 
+    'resource_type': 'image', 
+    'effect': 'sepia', 
+    'quality': 'auto',
+}
+
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,6 +116,8 @@ DATABASES = {
    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
+
+
 CSRF_TRUSTED_ORIGINS = ['https://*.codeinstitute-ide.net', 'https://*.herokuapp.com']
 
 
@@ -142,7 +155,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-import os
 
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
 
@@ -157,7 +169,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Add these for WhiteNoise 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+  STATICFILES_STORAGE = 'django_cloudistatic.storage.CloudinaryStaticFilesStorage'
 
 # STORAGES = {
 #     "staticfiles": {
