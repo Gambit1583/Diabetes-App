@@ -1,0 +1,343 @@
+/* Base Colors */
+:root {
+    --primary-blue: #005b96; /* Accessible blue */
+    --secondary-red: #e63946; /* Soft red for emphasis */
+    --neutral-grey: #f5f5f5; /* Light grey for backgrounds */
+    --accent-gold: #c5a880; /* Muted sand gold for accents */
+    --text-dark: #2d2d2d; /* Dark grey for primary text */
+    --text-light: #ffffff; /* White for light text */
+}
+
+/* Body and Background */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--neutral-grey);
+    line-height: 1.6;
+}
+
+main {
+    flex-grow: 1;
+    padding-bottom: 80px; /* Ensure padding matches footer height */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+}
+
+.navbar a {
+    color: var(--text-light);
+}
+
+.navbar a:hover {
+    color: var(--accent-gold);
+}
+
+/* Navbar Logo */
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+/* Navbar Glucogroove brand title */
+.glucogroove {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to right, #004aad, #d63333, #909090, #e4c580);
+    color: #000; /* Fallback color for unsupported browsers */
+    font-size: 2rem;
+}
+
+.glucogroove:hover {
+    background: linear-gradient(to left, #e4c580, #909090, #d63333, #004aad);
+    color: #fff; /* Fallback color for hover state */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: var(--primary-blue) !important;
+}
+
+.dropdown-item {
+    color: var(--text-light) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--secondary-red) !important;
+    color: var(--text-light) !important;
+}
+
+/* Cards */
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 250px; /* Ensure images fit within the card */
+}
+
+.card-body {
+    text-align: center;
+}
+
+/* .card-title, .card-text { 
+
+} */
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-primary {
+    margin-top: auto;
+}
+
+/* Form Fields Styling */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+form div {
+    flex: 1 1 48%;
+    margin-bottom: 15px !important;
+}
+
+form label {
+    display: block !important;
+    margin-bottom: 5px !important;
+}
+
+form input, form select {
+    width: 100% !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+    margin-bottom: 10px !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--secondary-red);
+    border: none;
+    color: var(--text-light);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 4px;
+    margin-top: 10px !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+}
+
+/* Alerts */
+.alert {
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: var(--accent-gold);
+    color: var(--text-dark);
+}
+
+.alert-danger {
+    background-color: var(--secondary-red);
+    color: var(--text-light);
+}
+
+/* Fixed Footer */
+.footer {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+footer p {
+    margin: 0;
+}
+
+.footer a {
+    color: var(--accent-gold);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--accent-gold);
+}
+
+/* Additional Styles */
+.main-bg {
+    background-color: #f8f9fa;
+}
+
+.dark-bg {
+    background-color: #343a40;
+}
+
+/* Accessibility Enhancements */
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+a:focus {
+    outline: 2px dashed var(--secondary-red);
+    outline-offset: 3px;
+}
+
+/* High-contrast Modes */
+@media (prefers-contrast: more) {
+    :root {
+        --primary-blue: #003366;
+        --secondary-red: #b22222;
+        --neutral-grey: #ffffff;
+        --accent-gold: #d2b48c;
+        --text-dark: #000000;
+        --text-light: #ffffff;
+    }
+}
+
+/* Responsive Adjustments for problematic range */
+@media (min-width: 371px) and (max-width: 767px) {
+    .card {
+        flex: 1 1 calc(50% - 1rem);
+    }
+    .card-title {
+        font-size: 1.25rem;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
+    .post-link {
+        display: block;
+        text-align: center; /* Ensure link is centered */
+    }
+    .btn-primary {
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Responsive Adjustments */ 
+@media (max-width: 768px) { 
+    .card { 
+        flex: 1 1 calc(50% - 1rem); 
+    } 
+    form { 
+        flex-direction: column; 
+    } 
+    form div { 
+        width: 100% !important; 
+    } 
+}
+
+@media (max-width: 576px) { 
+    .card { 
+        flex: 1 1 calc(100% - 1rem); 
+    } 
+    form { 
+        flex-direction: column; 
+    } 
+    form div { 
+        width: 100% !important; 
+    } 
+}
+
+@media (min-width: 768px) { 
+
+    .card-img-top { 
+        height: 250px; /* Adjust image height for larger screens */ 
+    } 
+}
+
+/* Ensure the card elements are always visible and clickable */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-body {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.post-link {
+    text-decoration: none; /* Ensure the link is not hidden */
+    color: inherit;
+}
+
+.btn-primary {
+    margin-top: auto; /* Ensure the button stays at the bottom */
+}
+
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.25rem;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 1rem;
+    }
+    .card-text {
+        font-size: 0.85rem;
+    }
+}
