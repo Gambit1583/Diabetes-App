@@ -76,6 +76,13 @@ INSTALLED_APPS = [
     'blood_sugars',
     'crispy_forms',
     'crispy_bootstrap4',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',  # Google provider
+    'allauth.socialaccount.providers.facebook',  # Facebook provider
+    'allauth.socialaccount.providers.instagram',  # Instagram provider
 ]
 
 CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
