@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import create_post, home_page, blog_detail, register, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment
+from .views import home_page, blog_detail, register, login_view, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment, create_post, custom_password_reset, custom_password_reset_confirm
 from django.contrib.auth import views as auth_views
-from . import views
 
 urlpatterns = [
     # Home page view
@@ -9,11 +8,15 @@ urlpatterns = [
 
     # User authentication views
     path('register/', register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('login/', login_view, name='login'),  # Use custom login view
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
+    # Custom password reset views
+    path('password_reset/', custom_password_reset, name='custom_password_reset'),
+    path('password_reset/confirm/', custom_password_reset_confirm, name='custom_password_reset_confirm'),
+
     # Blog post detail view
-    path('post/<slug:slug>/', views.blog_detail, name='blog_detail'),
+    path('post/<slug:slug>/', blog_detail, name='blog_detail'),
 
     # Voting functionalities for posts and comments
     path('blog/post/<int:post_id>/upvote/', upvote_post, name='upvote_post'),
@@ -32,3 +35,4 @@ urlpatterns = [
     path('comment/<int:comment_id>/edit/', edit_comment, name='edit_comment'),
     path('comment/<int:comment_id>/delete/', delete_comment, name='delete_comment'),
 ]
+

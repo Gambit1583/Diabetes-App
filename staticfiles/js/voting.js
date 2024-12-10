@@ -1,3 +1,6 @@
+/* jshint esversion: 6 */
+
+
 document.addEventListener('DOMContentLoaded', function() {
     function getCookie(name) {
         let cookieValue = null;

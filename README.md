@@ -38,6 +38,7 @@ I used an agile approach to project management. The GlucoGroove development proc
 ## User Stories
 
 - As a user I want to be able to login securely to access and update a blood sugar tracker.
+- As a user I want to be able to manually reset my password should I forget it.
 - As a user I want to be able to write a blog.
 - As a user I want to be able to edit/delete my blog.
 - As a user I want to be able to comment on other users posts.
@@ -46,7 +47,25 @@ I used an agile approach to project management. The GlucoGroove development proc
 - As a user I want to be able to view my blood sugar inputs on a graph.
 - As admin I want to be able to update users in the admin admin panel.
 - As admin I want to be able to edit or delete posts or comments
-- 
+
+
+## Wireframes
+
+### Home View
+![alt text](wireframes/Images/Homeview.png)
+
+## Login View
+![alt text](<wireframes/Images/Login View.png>)
+
+## Registration View
+![alt text](<wireframes/Images/Registration View.png>)
+
+## Logged in View
+![alt text](<wireframes/Images/Logged in View.png>)
+
+## Blood Sugar Tracker View
+![alt text](<wireframes/Images/Blood Sugar Tracker View.png>)
+
 
 ## Features 
 
@@ -106,7 +125,10 @@ All code has been validated through:
 - **HTML**: [W3C Markup Validator](https://validator.w3.org/).
 - **CSS**: [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
 - **Python**: PEP8 validation to ensure code quality.
+- **JavaScript** JShint
 
+
+![alt text](<static/images/Javascript Valdation Capstone..png>)
 ![alt text](<static/images/CSS VALIDATION CAPSTONE..png>)
 
 
@@ -127,7 +149,12 @@ but could be added in future developments.
 
 - **Browser Compatibility**: The website has been tested on Chrome and Edge.
 - **Responsiveness**: The platform has been tested on mobile, tablet, and desktop devices to ensure optimal performance.
-- **Tested access** with both existing and newly created users to ensure they can access their account.
+- **Tested access** - with both existing and newly created users to ensure they can access their account.
+- **Tested registration** and the automatic login on first use following registration.
+- **Tested Graph Functionality** - Tested graph functionality to show blood sugar inputs over various time frames. graph plaots and connects as a line graph.
+                                  Each plot when hovered over shows a color to indicate high/low/good and presents the user with the date and time that of
+                                  the blood sugar result as input by the user.
+                        
 
 ## Bugs, debugging and fixes or action
 
@@ -146,11 +173,26 @@ but could be added in future developments.
     Identified that a management command was over-writing the featured_image field.
     Commented out management command and STATICFILES_STORAGE which has fixed the error.
 
-  - Further issues in relation to static file storage were causing lack of responsiveness in heroku
+  - Further issues in relation to static file storage were causing lack of responsiveness in Heroku
     after starting a second application in my project. After running similar fixes to the previous ones 
     the issue was not resolved.
     This was eventually fixed by rewriting my entire settings.py and including the installation of
     Cloudinary within my project.
+
+- Link to reset passwrd function directing to django admin panel.
+  - Identified an incorrect link (using dev tools) in the html which was not pointing to the correct form.
+  - restructured views and corrected link in html so that the user is directed to the correct password reset form.
+
+
+## Deployment 
+
+All of the code for this project was written in Gitpod for the development environment.
+- Github was used for version control.
+- The application was deployed to Heroku from Github.
+
+
+
+
 
 ## Credits
 
