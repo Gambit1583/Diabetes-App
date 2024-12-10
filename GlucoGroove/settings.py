@@ -36,25 +36,6 @@ ALLOWED_HOSTS = ['8000-gambit1583-diabetesapp-t389nuuxhb4.ws.codeinstitute-ide.n
 
 SITE_ID = 1
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['console'],
-#             'level': 'DEBUG',
-#         },
-#     },
-# }
-
-
-
 # Authentication 
 
 LOGIN_URL = 'login'  # URL to redirect to when the user is not authenticated
