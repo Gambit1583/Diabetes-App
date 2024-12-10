@@ -140,12 +140,14 @@ and comments on blogs. It also identifies a logged in users ability to Edit or d
 A logged in user can maintain a food diary, daily diary and track their blood sugars which is displayed as a graph with
 color indicators for high/low blood sugars.
 
-The ERD includes elements for appointment booking with a specialist which will has not been included in the current iteration 
+The ERD includes elements for appointment booking with a specialist which will not been included in the current iteration 
 but could be added in future developments.
 
 ![alt text](static/images/GlucoGrooveERD.png)
 
-### **User Testing**
+
+
+## **User Testing**
 
 - **Browser Compatibility**: The website has been tested on Chrome and Edge.
 - **Responsiveness**: The platform has been tested on mobile, tablet, and desktop devices to ensure optimal performance.
