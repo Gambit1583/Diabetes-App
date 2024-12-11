@@ -5,8 +5,8 @@
 ## Overview 
 
 **GlucoGroove** is a Django-based online blog application that allows users to register, log in, 
-create new blog posts, leave comments, upvote or downvote comments, and interact with 
-other users' posts. The application is designed to provide a platform for sharing and 
+create new blog posts, leave comments, and interact with other users' posts. 
+The application is designed to provide a platform for sharing and 
 discussing experiences related to diabetes. The hope is to create an online community for those with diabetes
 while giving the user a private space to record and track their blood sugars, food intake and 
 general record their daily lives in a safe space.
@@ -229,7 +229,7 @@ The steps for deploying to Heroku are as follows (Experience from previous Djang
 8. **Config Vars:** In the "Settings" tab, click "Reveal Config Vars" and input the required environment variables.
 9. **Deploy:** Once the configuration is complete, click the "Deploy Branch" button. After successful deployment, a "View" button will appear to take you to the live site.
 
-**The live link to Heroku for this project can be found here:**
+**The live link to Heroku for this project can be found here:** https://glucogroove-6bdf28427bc6.herokuapp.com/
 
 
 ## Credits
