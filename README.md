@@ -26,8 +26,11 @@ that strive to improve the lives of those living with diabetes.
     - text-light: #ffffff; /* White for light text */
 
 ### Agile Methodologies - Project Management
+
 I used an agile approach to project management. The GlucoGroove development process was broken into sprints, and tasks were added to the GitHub project board to be tracked and managed through issues.
 
+**Link to Project Board:** https://github.com/users/Gambit1583/projects/6
+- This can also be accessed by clicking the second Github Icon in the apps footer.
 ### MoSCoW Prioritisation
 
 - **Must-Haves:** User registration and login, ability to create and delete a blog, Blood sugar tracker. Edit feature for blog posts.
@@ -52,18 +55,23 @@ I used an agile approach to project management. The GlucoGroove development proc
 ## Wireframes
 
 ### Home View
+
 ![alt text](wireframes/Images/Homeview.png)
 
 ## Login View
+
 ![alt text](<wireframes/Images/Login View.png>)
 
 ## Registration View
+
 ![alt text](<wireframes/Images/Registration View.png>)
 
 ## Logged in View
+
 ![alt text](<wireframes/Images/Logged in View.png>)
 
 ## Blood Sugar Tracker View
+
 ![alt text](<wireframes/Images/Blood Sugar Tracker View.png>)
 
 
@@ -79,13 +87,10 @@ I used an agile approach to project management. The GlucoGroove development proc
 - Keep a daily diary 
 - Responsive design for mobile and desktop 
 
-## Technologies Used 
 
-- Django - SQLite (default database) 
-- HTML/CSS 
-- JavaScript (for interactive features) 
+## Installation 
 
-## Installation ### Prerequisites 
+### Prerequisites 
 
 - Python 3.6+ 
 - Django
@@ -98,6 +103,8 @@ I used an agile approach to project management. The GlucoGroove development proc
 - Login with google/facebook account
 
 ## Technologies & Languages Used
+
+- Django - SQLite (default database) 
 - HTML5 - Markup language for structuring the website
 - CSS3 - Styling language for designing the layout and visual aesthetics
 - JavaScript - For interactivity and DOM manipulation on the frontend
@@ -107,21 +114,25 @@ I used an agile approach to project management. The GlucoGroove development proc
 - Whitenoise - For serving static files directly from Django
 
 ## Libraries & Frameworks
+
 - **Django** - Backend framework
 - **Django Crispy Forms** - For elegant form rendering
 - **Cloudinary** - Media storage
 - **Whitenoise** - For serving static files
 
 ## Tools & Programs
+
 - **GitHub Projects** - Project management and tracking
 - **Heroku** - Deployment and hosting
 - **Balsamiq** - Wireframes and design prototypes
+
 
 ## **Testing**
 
 ### **Validation Testing**
 
-All code has been validated through:
+**All code has been validated through:**
+
 - **HTML**: [W3C Markup Validator](https://validator.w3.org/).
 - **CSS**: [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
 - **Python**: PEP8 validation to ensure code quality.
@@ -192,19 +203,55 @@ All of the code for this project was written in Gitpod for the development envir
 - Github was used for version control.
 - The application was deployed to Heroku from Github.
 
+**Link to github Repository:** https://github.com/Gambit1583/Diabetes-App 
+- This can also be accessed by clicking the first Github icon in the apps footer.
 
+### Pre-Deployment
 
+To ensure a successful deployment to **Heroku:**
+
+- **requirements.txt** essential that this is kept up to date and in ensuring all imported modules are configured for Heroku.
+- **Procfile** This configures the application as a gunicorn web app on Heroku.
+- **Allowed Hosts** Ensure this is configured to include the Heroku app name and the localHost.
+- **Environment Variables** Ensure these are added to Heroku manually within the config vars and that your .env File is updated accordingly and added to the gitignore file.
+
+### Deploying with Heroku
+
+The steps for deploying to Heroku are as follows (Experience from previous Django projects):
+
+1. **Create New App:** Log in to your Heroku account and click on the "Create New App" button.
+2. **App Name:** Choose a unique name for your app.
+3. **Select Region:** Choose the appropriate region (Europe was selected for this project).
+4. **Create App:** Click the "Create App" button to proceed.
+5. **Deployment Method:** In the "Deploy" tab, select GitHub as the deployment method.
+6. **Connect to GitHub:** Search for the repository name and click "Connect".
+7. **Manual or Automatic Deployment:** Select either manual or automatic deployment. Ensure the main branch is selected for deployment.
+8. **Config Vars:** In the "Settings" tab, click "Reveal Config Vars" and input the required environment variables.
+9. **Deploy:** Once the configuration is complete, click the "Deploy Branch" button. After successful deployment, a "View" button will appear to take you to the live site.
+
+**The live link to Heroku for this project can be found here:**
 
 
 ## Credits
 
+### Code
 - John Rearden for his fantastic support as a coding coach.
 - Kevin Loughrey for his 1-1 support
 - Stack Overflow
-- Favicon.io: For Favicon generation.
 - W3 Schools particurlary for CSS and bootstrap.
+- Chat gpt for debugging snippets and recommendations on structure/formatting 
+
+
+### Media
+- Favicon.io: For Favicon generation.
+- Font Awesome
+
+
+### Acknowledgements
+
+- My two sons JJ and Ben who both live with Type 1 Diabetes and are my inspiration for this project.
 - WECA cohort for help and advice at a time where we all had 
   the pressure of our capstone project.
-- Chat gpt for debugging snippets and recommendations on structure/formatting 
-- Font Awesome
+
+
 

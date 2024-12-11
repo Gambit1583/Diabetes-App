@@ -32,17 +32,23 @@ def blog_detail(request, slug):
 
     return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form': form})
 
-# User registration view
+# registration
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, "Registration successful!")
             return redirect('home_page')
+        else:
+            messages.error(request, form.errors.as_text())  # Display form errors
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
 
 # Voting functionalities for posts and comments
 @require_http_methods(["POST"])

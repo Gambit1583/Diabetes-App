@@ -11,14 +11,18 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
+from django.db import models
+from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 class Post(models.Model):
     title = models.CharField(max_length=260)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)  # Make slug optional
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     featured_image = CloudinaryField('image', default='images/default.jpg', null=True, blank=True)
-    excerpt = models.TextField()
+    excerpt = models.TextField(blank=True, null=True)  # Make excerpt optional
     content = models.TextField()
     upvotes = models.ManyToManyField(User, related_name='post_upvotes', blank=True)
     downvotes = models.ManyToManyField(User, related_name='post_downvotes', blank=True)
@@ -34,6 +38,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
 
 
 class Comment(models.Model): 
