@@ -38,12 +38,18 @@ that strive to improve the lives of those living with diabetes.
     - text-dark: #2d2d2d; /* Dark grey for primary text */
     - text-light: #ffffff; /* White for light text */
 
+### Fonts
+
+***Roboto*** and ***Lato** have been used to provide a clean and modern look to the web application.
+
 ### Agile Methodologies - Project Management
 
 I used an agile approach to project management. The GlucoGroove development process was broken into sprints, and tasks were added to the GitHub project board to be tracked and managed through issues.
 
 **Link to Project Board:** https://github.com/users/Gambit1583/projects/6
 - This can also be accessed by clicking the second Github Icon in the apps footer.
+
+
 ### MoSCoW Prioritisation
 
 - **Must-Haves:** User registration and login, ability to create and delete a blog, Blood sugar tracker. Edit feature for blog posts.
