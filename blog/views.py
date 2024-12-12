@@ -30,7 +30,7 @@ def blog_detail(request, slug):
     else:
         form = CommentForm()
 
-    return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form': form})
+    return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form':form})
 
 # registration
 
@@ -210,7 +210,7 @@ def custom_password_reset_confirm(request):
     except User.DoesNotExist:
         messages.error(request, "User does not exist.")
         return redirect('custom_password_reset')
-    
+
     if request.method == 'POST':
         form = CustomSetPasswordForm(user=user, data=request.POST)
         if form.is_valid():

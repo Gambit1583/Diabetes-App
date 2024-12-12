@@ -2,20 +2,33 @@
 
 # **GlucoGroove**
 
-## Overview 
+## Overview
 
-**GlucoGroove** is a Django-based online blog application that allows users to register, log in, 
-create new blog posts, leave comments, and interact with other users' posts. 
-The application is designed to provide a platform for sharing and 
+**GlucoGroove** is a Django-based online blog application that allows users to register, log in,
+create new blog posts, leave comments, and interact with other users' posts.
+The application is designed to provide a platform for sharing and
 discussing experiences related to diabetes. The hope is to create an online community for those with diabetes
-while giving the user a private space to record and track their blood sugars, food intake and 
+while giving the user a private space to record and track their blood sugars, food intake and
 general record their daily lives in a safe space.
+
+## Database Schema - Entity Relationship Diagram (ERD)
+
+The ERD for GlucoGroove illustrates the realtionship between a user and how they can communicate effectively through blogs
+and comments on blogs. It also identifies a logged in users ability to Edit or delete posts created by them.
+
+A logged in user can maintain a food diary, daily diary and track their blood sugars which is displayed as a graph with
+color indicators for high/low blood sugars.
+
+The ERD includes elements for appointment booking with a specialist which will not been included in the current iteration
+but could be added in future developments.
+
+![alt text](static/images/GlucoGrooveERD.png)
 
 ## UX - User Experience
 
 ### Colour Scheme
 
-The color scheme was selected based on those used by current foundations, charities and organisations 
+The color scheme was selected based on those used by current foundations, charities and organisations
 that strive to improve the lives of those living with diabetes.
 
     - primary-blue: #005b96; /* Accessible blue */
@@ -75,24 +88,24 @@ I used an agile approach to project management. The GlucoGroove development proc
 ![alt text](<wireframes/Images/Blood Sugar Tracker View.png>)
 
 
-## Features 
+## Features
 
-- User registration and authentication 
-- Create, edit, and delete blog posts 
+- User registration and authentication
+- Create, edit, and delete blog posts
 - Leave comments on blog posts
 - Reply to comments and reply to replies
 - Track blood sugars
 - View a graph illustrating blood sugar level input by user
 - Keep a food diary
-- Keep a daily diary 
-- Responsive design for mobile and desktop 
+- Keep a daily diary
+- Responsive design for mobile and desktop
 
 
-## Installation 
+## Installation
 
-### Prerequisites 
+### Prerequisites
 
-- Python 3.6+ 
+- Python 3.6+
 - Django
 
 ## Future Features
@@ -104,7 +117,7 @@ I used an agile approach to project management. The GlucoGroove development proc
 
 ## Technologies & Languages Used
 
-- Django - SQLite (default database) 
+- Django - SQLite (default database)
 - HTML5 - Markup language for structuring the website
 - CSS3 - Styling language for designing the layout and visual aesthetics
 - JavaScript - For interactivity and DOM manipulation on the frontend
@@ -129,6 +142,12 @@ I used an agile approach to project management. The GlucoGroove development proc
 
 ## **Testing**
 
+### Automated Testing
+
+![alt text](static/images/Test_Views.png)
+
+![alt text](static/images/Tests_forms.png)
+
 ### **Validation Testing**
 
 **All code has been validated through:**
@@ -142,23 +161,7 @@ I used an agile approach to project management. The GlucoGroove development proc
 ![alt text](<static/images/Javascript Valdation Capstone..png>)
 ![alt text](<static/images/CSS VALIDATION CAPSTONE..png>)
 
-
-## Database Schema - Entity Relationship Diagram (ERD)
-
-The ERD for GlucoGroove illustrates the realtionship between a user and how they can communicate effectively through blogs 
-and comments on blogs. It also identifies a logged in users ability to Edit or delete posts created by them.
-
-A logged in user can maintain a food diary, daily diary and track their blood sugars which is displayed as a graph with
-color indicators for high/low blood sugars.
-
-The ERD includes elements for appointment booking with a specialist which will not been included in the current iteration 
-but could be added in future developments.
-
-![alt text](static/images/GlucoGrooveERD.png)
-
-
-
-## **User Testing**
+### **User Testing**
 
 - **Browser Compatibility**: The website has been tested on Chrome and Edge.
 - **Responsiveness**: The platform has been tested on mobile, tablet, and desktop devices to ensure optimal performance.
@@ -167,27 +170,28 @@ but could be added in future developments.
 - **Tested Graph Functionality** - Tested graph functionality to show blood sugar inputs over various time frames. graph plaots and connects as a line graph.
                                   Each plot when hovered over shows a color to indicate high/low/good and presents the user with the date and time that of
                                   the blood sugar result as input by the user.
-                        
+
+
 
 ## Bugs, debugging and fixes or action
 
 - Attribute error indicating Comment model does not have a title
   when trying to access Comments in admin panel.
-    
+
     - There is a __str__ method trying to reference a title fixed by updating
       statement in Comments model.
 
 - Debug set to FALSE application would not launch through Heroku giving a server error 500.
-  
+
   - Identified that compressed storage STATICFILES_STORAGE prevent the page loading so commented out.
     this prevented the server 500 error but the default image for blog posts would not load.
-  
+
   - Image was trying to load from a media file rather than the static folder.
     Identified that a management command was over-writing the featured_image field.
     Commented out management command and STATICFILES_STORAGE which has fixed the error.
 
   - Further issues in relation to static file storage were causing lack of responsiveness in Heroku
-    after starting a second application in my project. After running similar fixes to the previous ones 
+    after starting a second application in my project. After running similar fixes to the previous ones
     the issue was not resolved.
     This was eventually fixed by rewriting my entire settings.py and including the installation of
     Cloudinary within my project.
@@ -197,13 +201,13 @@ but could be added in future developments.
   - restructured views and corrected link in html so that the user is directed to the correct password reset form.
 
 
-## Deployment 
+## Deployment
 
 All of the code for this project was written in Gitpod for the development environment.
 - Github was used for version control.
 - The application was deployed to Heroku from Github.
 
-**Link to github Repository:** https://github.com/Gambit1583/Diabetes-App 
+**Link to github Repository:** https://github.com/Gambit1583/Diabetes-App
 - This can also be accessed by clicking the first Github icon in the apps footer.
 
 ### Pre-Deployment
@@ -239,7 +243,7 @@ The steps for deploying to Heroku are as follows (Experience from previous Djang
 - Kevin Loughrey for his 1-1 support
 - Stack Overflow
 - W3 Schools particurlary for CSS and bootstrap.
-- Chat gpt for debugging snippets and recommendations on structure/formatting 
+- Chat gpt for debugging snippets and recommendations on structure/formatting
 
 
 ### Media
@@ -250,7 +254,7 @@ The steps for deploying to Heroku are as follows (Experience from previous Djang
 ### Acknowledgements
 
 - My two sons JJ and Ben who both live with Type 1 Diabetes and are my inspiration for this project.
-- WECA cohort for help and advice at a time where we all had 
+- WECA cohort for help and advice at a time where we all had
   the pressure of our capstone project.
 
 
