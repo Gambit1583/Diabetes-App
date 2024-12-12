@@ -164,14 +164,20 @@ I used an agile approach to project management. The GlucoGroove development proc
 ### **User Testing**
 
 - **Browser Compatibility**: The website has been tested on Chrome and Edge.
-- **Responsiveness**: The platform has been tested on mobile, tablet, and desktop devices to ensure optimal performance.
+- **Responsiveness** The platform has been tested on mobile, tablet, and desktop devices to ensure optimal performance.
 - **Tested access** - with both existing and newly created users to ensure they can access their account.
 - **Tested registration** and the automatic login on first use following registration.
 - **Tested Graph Functionality** - Tested graph functionality to show blood sugar inputs over various time frames. graph plaots and connects as a line graph.
                                   Each plot when hovered over shows a color to indicate high/low/good and presents the user with the date and time that of
                                   the blood sugar result as input by the user.
 
+![alt text](<static/images/Test for blood sugar tracker.png>)
 
+- **Tested user upload** When creating a blog a user is able to upload their own image providing individulism and personal style to a blog.
+                         Other users are ablt to comment on an individuals blog.
+
+
+![alt text](<static/images/Upload image and comment test.png>)
 
 ## Bugs, debugging and fixes or action
 

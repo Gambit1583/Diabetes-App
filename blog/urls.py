@@ -1,10 +1,13 @@
 from django.urls import path
-from .views import home_page, blog_detail, register, login_view, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment, create_post, custom_password_reset, custom_password_reset_confirm
+from .views import home_page, blog_detail, register, login_view, upvote_post, downvote_post, upvote_comment, downvote_comment, edit_post, delete_post, edit_comment, delete_comment, create_post, custom_password_reset, custom_password_reset_confirm, about
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # Home page view
     path('', home_page, name='home_page'),
+
+    # About page
+    path('about/', about, name='about'),
 
     # User authentication views
     path('register/', register, name='register'),
@@ -35,4 +38,3 @@ urlpatterns = [
     path('comment/<int:comment_id>/edit/', edit_comment, name='edit_comment'),
     path('comment/<int:comment_id>/delete/', delete_comment, name='delete_comment'),
 ]
-

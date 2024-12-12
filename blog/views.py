@@ -30,10 +30,9 @@ def blog_detail(request, slug):
     else:
         form = CommentForm()
 
-    return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form':form})
+    return render(request, 'blog/blog_detail.html', {'post': post, 'comments': comments, 'form': form})
 
-# registration
-
+# Registration view
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -47,8 +46,6 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
-
-
 
 # Voting functionalities for posts and comments
 @require_http_methods(["POST"])
@@ -115,7 +112,7 @@ def edit_post(request, post_id):
 
     return render(request, 'blog/edit_post.html', {'post': post})
 
-# Delete Post if user
+# Delete post
 @login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -154,7 +151,7 @@ def delete_comment(request, comment_id):
     comment.delete()
     return redirect('blog_detail', slug=post_slug)
 
-# Create Post
+# Create post
 @login_required
 def create_post(request):
     if request.method == 'POST':
@@ -168,7 +165,7 @@ def create_post(request):
         form = PostForm()
     return render(request, 'blog/create_post.html', {'form': form})
 
-# Login View
+# Login view
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -189,7 +186,6 @@ def login_view(request):
     return render(request, 'registration/login.html', {'form': form})
 
 # Custom Password Reset Views
-
 def custom_password_reset(request):
     if request.method == 'POST':
         form = CustomPasswordResetForm(request.POST)
@@ -222,5 +218,6 @@ def custom_password_reset_confirm(request):
         form = CustomSetPasswordForm(user=user)
     return render(request, 'registration/custom_password_reset_confirm.html', {'form': form})
 
-
-
+# About page view
+def about(request):
+    return render(request, 'about.html')
