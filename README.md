@@ -9,6 +9,11 @@ create new blog posts, leave comments, and interact with other users' posts.
 The application is designed to provide a platform for sharing and
 discussing experiences related to diabetes. The hope is to create an online community for those with diabetes
 while giving the user a private space to record and track their blood sugars, food intake and
+
+##SuperUser Account:
+
+Username:pj2206
+Password: : Louise83?!
 general record their daily lives in a safe space.
 
 ## Database Schema - Entity Relationship Diagram (ERD)
